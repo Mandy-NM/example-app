@@ -42,14 +42,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    //One user can write many posts
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
+    //One user can write many co9mments
     public function comment()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function editPostPermission()
+    {
+        return $this->hasMany(EditPostPermission::class);
+    }
+
+    public function editCommentPermission()
+    {
+        return $this->hasMany(EditCommentPermission::class);
     }
 }
