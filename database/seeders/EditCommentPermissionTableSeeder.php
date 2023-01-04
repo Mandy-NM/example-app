@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\EditCommentPermission;
 
 class EditCommentPermissionTableSeeder extends Seeder
 {
@@ -19,6 +20,6 @@ class EditCommentPermissionTableSeeder extends Seeder
         $p->user_id = 1;
         $p->save();
 
-        //EditCommentPermission::factory()->count(10)->create();
+        EditCommentPermission::factory()->count(10)->create();
     }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\EditPostPermission;
 
 class EditPostPermissionTableSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class EditPostPermissionTableSeeder extends Seeder
         $p->user_id = 1;
         $p->save();
 
-        //EditPostPermission::factory()->count(10)->create();
+        EditPostPermission::factory()->count(10)->create();
 
     }
 }
