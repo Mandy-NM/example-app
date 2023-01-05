@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
@@ -21,7 +22,7 @@ class UserTableSeeder extends Seeder
         $u->profile = 'hi';
         $u->email = 'misha@gmail.com';
         $u->email_verified_at = now();
-        $u->password = 'passw0rd';
+        $u->password = Hash::make('12345678');
         $u->save();
 
         User::factory()->count(10)->create();
