@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\PostImage;
+use App\Models\Comment;
 
 
 class PostController extends Controller
@@ -18,7 +19,8 @@ class PostController extends Controller
     {
         // $posts = Post::orderBy('id', 'desc')->paginate(5);
         // $posts = Post::with('postImages')-> orderBy('id', 'desc') ->paginate(5); 
-        $posts = Post::with('postImages')-> orderBy('id', 'desc') ->paginate(5); 
+        $posts = Post::with('postImages', 'comments')-> orderBy('id', 'desc') ->paginate(5); 
+
         // dd($posts);        
         // return view('posts.index', ['posts => $posts']);
         return view('posts.index', compact('posts'));

@@ -22,7 +22,7 @@ class Post extends Model
     }
 
     //one post can has zero to many comments
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }
