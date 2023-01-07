@@ -22,7 +22,7 @@ class PostImageFactory extends Factory
         return [
             'post_id' => fake()->randomElement($postIds),
             //'image' => fake() -> binary(),
-            'image' => fake() -> imageUrl(),
+            'url' => fake() -> imageUrl(),
         ];
     }
 }

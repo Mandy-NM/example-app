@@ -24,6 +24,6 @@ class CommentTableSeeder extends Seeder
         $c->updated_at = now();
         $c->save();
 
-        Comment::factory()->count(10)->create();
+        Comment::factory()->count(20)->create();
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\PostImage;
+
 
 class PostController extends Controller
 {
@@ -14,7 +16,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(5);;   
+        // $posts = Post::orderBy('id', 'desc')->paginate(5);
+        // $posts = Post::with('postImages')-> orderBy('id', 'desc') ->paginate(5); 
+        $posts = Post::with('postImages')-> orderBy('id', 'desc') ->paginate(5); 
+        // dd($posts);        
         // return view('posts.index', ['posts => $posts']);
         return view('posts.index', compact('posts'));
 

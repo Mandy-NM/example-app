@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('post_images', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('post_id')->unsigned();
-            $table->binary('image');
+            $table->string('url');
             $table->timestamps();
 
             $table->foreign('post_id')->references('id')->on('posts')

@@ -1,8 +1,21 @@
 @extends('layouts.header')
 
-
 @section('content')
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @foreach ($posts as $post)
         <div style="margin: 5%">
             <h2>{{ $post -> title }}</h2>
@@ -11,12 +24,16 @@
                 <span>{{ $post -> created_at }}</span>
                 
             </div>
-            <div>{{ $post -> content }}</div>
+            <div class="content_container">
+                @foreach ($post->postImages as $image)
+                    <img src="{{ $image->url }}">
+                @endforeach
+                <div>{{ $post -> content }}</div>
+            </div>
         </div>
 
 
     @endforeach    
-    {{-- {{ $posts->links() }} --}}
     <div>
         {{ $posts->links('pagination::bootstrap-4', ['onEachSide' => 5]) }}
     </div>
