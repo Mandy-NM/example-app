@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\PostImage;
 use App\Models\Comment;
 
-
-class PostController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts = Post::orderBy('id', 'desc')->paginate(5);
-        // $posts = Post::with('postImages')-> orderBy('id', 'desc') ->paginate(5); 
-        $posts = Post::with('postImages', 'comments')-> orderBy('id', 'desc') ->paginate(5); 
-
-        // dd($posts);        
-        // return view('posts.index', ['posts => $posts']);
-        return view('posts.index', compact('posts'));
-
+        //
     }
 
     /**
@@ -45,7 +35,28 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'content' => 'required',
+            'post_id' => 'required',
+        ]);
+
+        // Create a new comment
+        $comment = new Comment();
+        $comment->user_id = auth()->user()->id;;
+        $comment->post_id = $request->input('post_id');
+        $comment->content = $request->input('content');
+        $comment-> created_at = now();
+        $comment-> updated_at = now();
+        $comment->save();      
+        
+        // Return the new comment as a response
+        // return response()->json([
+        //     'comment' => $comment
+        // ]); 
+        return response()->json([
+            'comment' => $comment->load('user'),
+        ]);               
     }
 
     /**
@@ -56,9 +67,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::with('postImages', 'comments') ->findOrFail($id); 
-        // dd($post);
-        return view('posts.show', compact('post'));
+        //
     }
 
     /**
