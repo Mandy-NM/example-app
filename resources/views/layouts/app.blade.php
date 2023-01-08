@@ -14,8 +14,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+        <div class="min-h-screen bg-gray-100" style="background: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%) fixed;">
+            {{-- @include('layouts.navigation')
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -24,7 +24,7 @@
                         {{ $header }}
                     </div>
                 </header>
-            @endif
+            @endif --}}
 
             <!-- Page Content -->
             <main>

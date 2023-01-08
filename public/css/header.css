@@ -2,19 +2,14 @@ body {
     margin: 0px;
     background: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%) fixed;
     font-family: DejaVu Sans Mono, monospace;
-    /* height: 100%; */
 }
-
-/* html{
-    height: 100%;
-} */
 
 .nav_bar {
     margin: 0%;
     display: flex;
     justify-content: space-between;
     padding: 2%;
-    background: #4e7ed9
+    background: #4e7ed9;
 }
 
 .topic {
@@ -39,12 +34,6 @@ body {
     border-color: #ffffff;
 }
 
-/* .icon{
-    width: 50%;
-}
-.icon:hover{
-    opacity: 0.9;
-} */
 .header_item:hover{
     color: #ffc47d;
 }

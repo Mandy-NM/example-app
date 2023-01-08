@@ -22,10 +22,16 @@
                     url: $(this).attr('action'),
                     data: formData,
                     success: function(response) {
-                        // Add the new comment to the comments list
-                        $('#comments-list').append('<li class="list-group-item"> user: ' 
-                            + response.comment.user.name + '<br>' + response.comment.content + '</li>');
+                        let comment_date = new Date(response.comment.created_at);
+                        let formattedDate = comment_date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 
+                        // Add the new comment to the comments list
+                        $('#comments-list').append('<li class="list-group-item"><div>' 
+                            + response.comment.content + '<p class="card-text "><small class="text-muted float-right mt-5">Created by ' 
+                            + response.comment.user.name + ' on '
+                            + formattedDate
+                            + '</small></p></li>');
+                                  
                         // Clear the form
                         $('#comment-form')[0].reset();
                         

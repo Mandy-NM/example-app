@@ -14,6 +14,83 @@
 
 
 <body>
+
+
+<!-- Use the navbar component to create a header -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #4e7ed9; font-weight: bold; font-size: 23px;">
+
+        <a class="navbar-brand" href="#">
+            <img src=" {{ url('img/blog.svg') }} " width="30" height="30" alt="">
+        </a>
+
+        <!-- Use the navbar-nav class to create the navigation menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav m-3" >
+                <li class="nav-item mr-5" >
+                <a class="nav-link" href="{{route('posts.index') }}">Home</a>
+                </li>
+                <li class="nav-item mr-5">
+                <a class="nav-link" href="{{route('posts.index') }}">Post</a>
+                </li>
+            
+
+
+
+            {{-- Check if the user has logged in --}}
+            @if (auth()->check()) 
+                {{-- check if the user is an admin --}}
+                @if (auth()->user()->user_type == 'admin') 
+                    <li class="nav-item mr-5">
+                        <a class="nav-link" href="#">Manage User</a>
+                    </li>
+            </ul>
+                @endif
+            </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        {{-- hidden form --}}
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>                    
+                    </div>
+                    </li>
+                </ul>            
+            @else 
+            </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                    </li>
+                </ul>    
+            @endif
+
+
+
+        </div>
+    </nav>
+  
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
     <nav class="nav_bar">
         <div class="topics">
             <a href=""><div id="home" class="header_item">Home</div></a>

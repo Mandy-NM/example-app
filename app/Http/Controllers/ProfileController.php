@@ -6,6 +6,10 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Post;
+use App\Models\Comment;
+
+
 
 class ProfileController extends Controller
 {
@@ -17,8 +21,18 @@ class ProfileController extends Controller
      */
     public function edit(Request $request)
     {
+        $user = auth()->user();
+        $all_posts = Post::paginate(8);
+        $all_comments = Comment::paginate(8);
+        $posts = Post::where('user_id', $user->id)->paginate(8);
+        $comments = Comment::where('user_id', $user->id)->paginate(8);
+
         return view('profile.edit', [
             'user' => $request->user(),
+            'posts' => $posts,
+            'comments' => $comments,
+            'all_posts' => $all_posts,
+            'all_comments' => $all_comments
         ]);
     }
 
