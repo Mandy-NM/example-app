@@ -6,38 +6,44 @@
 </head> --}}
 @section('content')
 
-
-
-
-
-
-
-
-
-
-
-
-
-    @foreach ($posts as $post)
-        <div style="margin: 5%" class="container-md">
-            <h2> <a href=" {{ route('posts.show', ['id' => $post ->id]) }}" style="text-decoration: none;">{{ $post -> title }}</a> </h2>
-            <div> 
-                <span>Creator: {{ $post -> user -> name }}</span>
-                <span>{{ $post -> created_at }}</span>
-                
+    <h1 class="display-4 text-center text-primary" style="margin: 4%">Blog</h1>
+    <!-- Display the list of posts -->
+    <div class="card-columns mt-4" style="margin: 5%">
+        @foreach ($posts as $post)
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><a href=" {{ route('posts.show', ['id' => $post ->id]) }}" style="text-decoration: none;">{{ $post -> title }}</a></h5>
+                    <div class="row mt-3">
+                        @foreach ($post->postImages as $image)
+                            <div class="col-3">
+                                <img src="{{ $image->url }}" class="img-fluid">
+                            </div>
+                        @endforeach
+                    </div>                      
+                    <p class="card-text">{{ $post->content }}</p>                  
+                    <p class="card-text">
+                        <small class="text-muted">
+                            Created by {{ $post->user->name }}
+                            on {{ $post->created_at->format('M d, Y') }}
+                        </small>
+                    </p>
+                <!-- Display the "Edit" button for the creator of each post -->
+                @if (Auth::check() && Auth::user()->id == $post->user->id)
+                    <a href="#" class="btn btn-primary mt-2">Edit</a>
+                @endif
+                </div>
             </div>
-            <div class="content_container">
-                @foreach ($post->postImages as $image)
-                    <img src="{{ $image->url }}" class="" style="width: 50%">
-                @endforeach
-                {{-- img-fluid mx-auto d-block --}}
-                <div>{{ $post -> content }}</div>
-            </div>
-        </div>
-
-
-    @endforeach    
-    <div class="grid text-center">
-        {{ $posts->links('pagination::bootstrap-4', ['onEachSide' => 5]) }}
+        @endforeach
     </div>
+
+    <!-- Center the pagination element -->
+    <nav>
+        <ul class="pagination d-flex justify-content-center mx-auto">
+            {{ $posts->links('pagination::bootstrap-4', ['onEachSide' => 6]) }}
+        </ul>
+    </nav>
+
+
+
+
 @endsection

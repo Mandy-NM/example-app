@@ -18,10 +18,7 @@
         <div class="topics">
             <a href=""><div id="home" class="header_item">Home</div></a>
             <div class="vl"></div>
-            <a href=""><div id="blog" class="header_item">Blog</div></a>
-            <div class="vl"></div>
-            <a href=""><div id="post" class="header_item">Public Post</div></a>
-
+            <a href=" {{route('posts.index') }}"><div id="post" class="header_item">Post</div></a>
 
 
 

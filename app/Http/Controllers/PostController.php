@@ -17,12 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts = Post::orderBy('id', 'desc')->paginate(5);
-        // $posts = Post::with('postImages')-> orderBy('id', 'desc') ->paginate(5); 
-        $posts = Post::with('postImages', 'comments')-> orderBy('id', 'desc') ->paginate(5); 
-
-        // dd($posts);        
-        // return view('posts.index', ['posts => $posts']);
+        $posts = Post::with('postImages', 'comments')-> orderBy('id', 'desc') ->paginate(6);
+        
         return view('posts.index', compact('posts'));
 
     }
@@ -57,6 +53,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::with('postImages', 'comments') ->findOrFail($id); 
+        // $comments = $post->comments()->paginate(5);
         // dd($post);
         return view('posts.show', compact('post'));
     }

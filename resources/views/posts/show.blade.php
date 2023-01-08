@@ -49,8 +49,12 @@
 <div class="container mt-4">
     <h1>{{ $post->title }}</h1>
     <div> 
-        <span>Creator: {{ $post -> user -> name }}</span>
-        <span>{{ $post -> created_at }}</span>        
+        <p class="card-text">
+            <small class="text-muted">
+                Created by {{ $post->user->name }}
+                on {{ $post->created_at->format('M d, Y') }}
+            </small>
+        </p>     
     </div>
     @foreach ($post->postImages as $image)
         <img src="{{ $image->url }}" class="" style="width: 50%">
@@ -62,14 +66,26 @@
 <div class="container mt-4">
     <h2>Comments</h2>
     <ul class="list-group" id="comments-list">
-      @foreach($post->comments as $comment)
-        <li class="list-group-item"> 
-            user: {{ $comment->user -> name }} <br>
-            {{ $comment->content }}</li>
+      @foreach($post-> comments as $comment)
+        <li class="list-group-item "> 
+            <div>{{ $comment->content }}</div>
+            
+            <p class="card-text ">
+                <small class="text-muted float-right mt-5">
+                    Created by {{ $comment->user->name }}
+                    on {{ $comment->created_at->format('M d, Y') }}
+                </small>
+            </p>
+        </li>
       @endforeach
     </ul>
 </div>
+<!-- Display the pagination links -->
+{{-- <div class="grid text-center" style="margin-left: 43%; margin-top: 1%;">
+    {{ $comments->links('pagination::bootstrap-4', ['onEachSide' => 5]) }}
+</div> --}}
   
+
 <!-- Display the comment form -->
 <div class="container mt-4">
     <h2>Leave a Comment</h2>
