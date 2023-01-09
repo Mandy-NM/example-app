@@ -24,6 +24,6 @@ class PostTableSeeder extends Seeder
         $p->updated_at = now();
         $p->save();
 
-        Post::factory()->count(10)->create();
+        Post::factory()->count(15)->create();
     }
 }
