@@ -40,6 +40,8 @@ Route::get('/posts/create', [PostController::class, 'create'])
 
 Route::get('/posts', [PostController::class, 'index']) ->name('posts.index');
 Route::get('/posts/{id}', [PostController::class, 'show']) -> name('posts.show');
+Route::get('/profile/showPostsComments/{id}', [ProfileController::class, 'showPostsAndComments']) ->name('profile.showPostsAndComments');
+
 Route::post('/posts/store', [PostController::class, 'store']) 
     ->middleware(['auth']) -> name('posts.store');
 

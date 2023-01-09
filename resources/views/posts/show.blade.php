@@ -37,7 +37,6 @@
                         
                     },
                     error: function(response) {
-                        // Display an error message
                         alert('There was an error posting your comment. Please try again.');
                     }
                 });
@@ -57,11 +56,11 @@
     <div class="mb-5"> 
         <p class="card-text">
             <small class="text-muted">
-                Created by {{ $post->user->name }}
+                Created by <a href=" {{ route('profile.showPostsAndComments', ['id' => $post -> user ->id]) }} ">{{ $post->user->name }}</a> 
                 on {{ $post->created_at->format('M d, Y') }}
             </small>
 
-            <!-- Display the "Edit" button -->
+            <!-- if current user is an admin or the creator, then display the "Edit" button -->
             @if (Auth::check() )
                 @if (auth()->user()->user_type == 'admin' || Auth::user()->id == $post->user->id) 
                     <a href="{{ route('posts.edit', ['id' => $post ->id]) }}" class="btn btn-primary float-right">Edit</a>
@@ -86,7 +85,8 @@
             
             <p class="card-text ">
                 <small class="text-muted float-right mt-5">
-                    Created by {{ $comment->user->name }}
+                    Created by 
+                    <a href=" {{ route('profile.showPostsAndComments', ['id' => $comment -> user ->id]) }} ">{{ $comment->user->name }}</a>
                     on {{ $comment->created_at->format('M d, Y') }}
                 </small>
             </p>
@@ -100,7 +100,7 @@
 </div> --}}
   
 
-<!-- Display the comment form -->
+<!-- create comment form -->
 <div class="container mt-4">
     <h2>Leave a Comment</h2>
     <form id="comment-form" method="POST" action="{{ route('comments.store') }}">

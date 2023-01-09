@@ -32,7 +32,7 @@
                             on {{ $post->created_at->format('M d, Y') }}
                         </small>
                     </p>
-                <!-- Display the "Edit" button for the creator of each post -->
+                
                 @if (Auth::check() )
                     @if (auth()->user()->user_type == 'admin' || Auth::user()->id == $post->user->id) 
                         <a href="{{ route('posts.edit', ['id' => $post ->id]) }}" class="btn btn-primary mt-2">Edit</a>
@@ -44,7 +44,7 @@
         @endforeach
     </div>
 
-    <!-- Center the pagination element -->
+    <!-- pagination  -->
     <nav>
         <ul class="pagination d-flex justify-content-center mx-auto">
             {{ $posts->links('pagination::bootstrap-4', ['onEachSide' => 6]) }}

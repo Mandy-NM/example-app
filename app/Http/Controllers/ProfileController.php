@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\User;
 
 
 
@@ -78,4 +79,18 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    //display a list of posts and comments the user created
+    public function showPostsAndComments($id)
+    {
+        $user = User::findOrFail($id); 
+        $posts = Post::where('user_id', $user->id)->paginate(8);
+        $comments = Comment::where('user_id', $user->id)->paginate(8);
+
+        return view('profile.showPostsAndComments', [
+            'user' => $user,
+            'posts' => $posts,
+            'comments' => $comments,
+        ]);
+    }    
 }
