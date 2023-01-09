@@ -79,20 +79,25 @@
                         </thead>
                         <tbody>
 
-
-
-
-
                                 @foreach ($comments as $comment)
                                 <tr onclick="location.href='{{ route('posts.show', ['id' => $comment->post ->id]) }}';" 
                                     style='cursor: pointer;'>
                                         <th scope="row">{{ $comment->id }}</th>
                                         <td>{{ $comment->post->title }}</td>
+                                        <td id="shorten_comment{{$comment->id }}">
+                                            <script>
+                                                words = "{{ $comment-> content }}";
+                                                if (words.length > 10) {
+                                                    words = words.slice(0, 10);
+                                                    words += words + '...';    
+                                                } 
+                                                res = document.getElementById('shorten_comment{{$comment->id }}');
+                                                res.innerText  = words; 
+                                                // $('#shorten_comment{{$comment->id }}').innerText  = words;      
+                                            </script>                                        
                                         <td>{{ $comment->created_at }}</td>
                                 </tr> 
                                   @endforeach  
-
-
                         </tbody>
                       </table>
                     <!-- Center the pagination element -->
