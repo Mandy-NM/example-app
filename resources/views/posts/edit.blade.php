@@ -2,27 +2,11 @@
 
 @section('content')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="container">
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-5 mb-5">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Edit Post</div>
+                <div class="card-header h4">Edit Post</div>
 
                 <div class="card-body">
                     @if (session('status'))

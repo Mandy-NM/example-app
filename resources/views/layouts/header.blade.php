@@ -30,7 +30,7 @@
                 <a class="nav-link" href="{{route('posts.index') }}">Home</a>
                 </li>
                 <li class="nav-item mr-5">
-                <a class="nav-link" href="{{route('posts.index') }}">Post</a>
+                <a class="nav-link" href="{{route('posts.create') }}">Create Post</a>
                 </li>
             
 
@@ -93,9 +93,9 @@
 
     <nav class="nav_bar">
         <div class="topics">
-            <a href=""><div id="home" class="header_item">Home</div></a>
+            <a href="{{route('posts.index') }}"><div id="home" class="header_item">Home</div></a>
             <div class="vl"></div>
-            <a href=" {{route('posts.index') }}"><div id="post" class="header_item">Post</div></a>
+            <a href=" {{route('posts.create') }}"><div id="post" class="header_item">Create Post</div></a>
 
 
 

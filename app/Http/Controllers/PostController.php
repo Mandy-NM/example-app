@@ -30,7 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -41,8 +41,33 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        // Create a new post
+        $post = new Post;
+        $post->user_id = auth()->user() -> id;        
+        $post->title = $request->input('title');
+        $post->content = $request->input('content'); 
+        $post->created_at = now();
+        $post->updated_at = now(); 
+        $post->save();  
+        
+        $request->request->set('post_id', $post -> id);
+  
+        // Handle file upload
+        if($request->hasFile('images')) {
+            // Update image paths in the database
+            $img_controller = new PostImageController();
+            $img_controller -> store($request);
+        }  
+
+        return redirect()->route('posts.show', ['id' => $post ->id])->with('status', 'Post created successfully');
+
     }
+
 
     /**
      * Display the specified resource.
@@ -56,6 +81,7 @@ class PostController extends Controller
         return view('posts.show', compact('post'));
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -67,6 +93,7 @@ class PostController extends Controller
         $post = Post::with('postImages', 'comments') ->findOrFail($id);
         return view('posts.edit', compact('post'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -96,6 +123,7 @@ class PostController extends Controller
         }        
         return redirect()->route('posts.show', ['id' => $post ->id])->with('status', 'Post updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.

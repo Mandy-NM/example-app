@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('title');
             $table->longText('content');
-            $table->enum('publish_status', ['private','public']);
+            // $table->enum('publish_status', ['private','public']);
             $table->timestamp('created_at');
             $table->dateTime('updated_at');
             //$table->timestamps();

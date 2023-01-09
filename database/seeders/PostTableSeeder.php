@@ -19,7 +19,7 @@ class PostTableSeeder extends Seeder
         $p->user_id = 1;
         $p->title = 'testing 1';
         $p->content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu.';
-        $p->publish_status = 'private';
+        // $p->publish_status = 'private';
         $p->created_at = now();
         $p->updated_at = now();
         $p->save();

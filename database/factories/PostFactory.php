@@ -25,7 +25,7 @@ class PostFactory extends Factory
             'user_id' => fake()->randomElement($userIds),
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(),
-            'publish_status' => fake()->randomElement(['private','public']),
+            // 'publish_status' => fake()->randomElement(['private','public']),
             'created_at' => fake()-> dateTime(),
             'updated_at' => now(),
         ];

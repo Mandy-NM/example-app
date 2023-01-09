@@ -7,8 +7,13 @@
 @section('content')
 
     <h1 class="display-4 text-center text-primary" style="margin: 4%">Blog</h1>
+    {{-- <div class="row justify-content-center mt-5 mb-5">    <a href="{{ route('posts.create') }}" class="btn btn-primary m-1 ">Create Post</a>
+    </div> --}}
+
     <!-- Display the list of posts -->
     <div class="card-columns mt-4" style="margin: 5%">
+        
+
         @foreach ($posts as $post)
             <div class="card">
                 <div class="card-body">

@@ -9,7 +9,7 @@
 
 <body>
 
-    @yield('content')
+    @include('posts.index')
 
 </body>
 </html>
