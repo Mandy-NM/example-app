@@ -48,7 +48,7 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    //One user can write many co9mments
+    //One user can write many comments
     public function comment()
     {
         return $this->hasMany(Comment::class);
