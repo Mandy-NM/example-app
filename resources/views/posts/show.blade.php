@@ -96,7 +96,7 @@
 </div>
 <!-- Display the pagination links -->
 {{-- <div class="grid text-center" style="margin-left: 43%; margin-top: 1%;">
-    {{ $comments->links('pagination::bootstrap-4', ['onEachSide' => 5]) }}
+    {{ $post-> comments->links('pagination::bootstrap-4', ['onEachSide' => 5]) }}
 </div> --}}
   
 

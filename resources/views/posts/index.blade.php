@@ -6,7 +6,7 @@
 </head> --}}
 @section('content')
 
-    <h1 class="display-4 text-center text-primary" style="margin: 4%">Blog</h1>
+    <h1 class="display-4 text-center text-primary" style="margin: 3%">Blog</h1>
     {{-- <div class="row justify-content-center mt-5 mb-5">    <a href="{{ route('posts.create') }}" class="btn btn-primary m-1 ">Create Post</a>
     </div> --}}
 
