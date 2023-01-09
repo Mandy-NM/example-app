@@ -28,9 +28,12 @@
                         </small>
                     </p>
                 <!-- Display the "Edit" button for the creator of each post -->
-                @if (Auth::check() && Auth::user()->id == $post->user->id)
-                    <a href="#" class="btn btn-primary mt-2">Edit</a>
+                @if (Auth::check() )
+                    @if (auth()->user()->user_type == 'admin' || Auth::user()->id == $post->user->id) 
+                        <a href="{{ route('posts.edit', ['id' => $post ->id]) }}" class="btn btn-primary mt-2">Edit</a>
+                    @endif
                 @endif
+
                 </div>
             </div>
         @endforeach

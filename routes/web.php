@@ -37,8 +37,11 @@ use App\Http\Controllers\CommentController;
 Route::get('/', [PostController::class, 'index']);
 
 Route::get('/posts', [PostController::class, 'index']) ->name('posts.index');
-
 Route::get('/posts/{id}', [PostController::class, 'show']) -> name('posts.show');
+Route::get('/posts/edit/{id}', [PostController::class, 'edit']) ->name('posts.edit');
+Route::patch('/posts/update/{id}', [PostController::class, 'update']) ->name('posts.update');
+
+// Route::delete('/postImages/delete/{id}', [PostImageController::class, 'delete']) ->name('postImages.delete');
 
 Route::post('/comments/store', [CommentController::class, 'store']) -> name('comments.store');
 

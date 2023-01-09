@@ -54,16 +54,24 @@
 
 <div class="container mt-4">
     <h1>{{ $post->title }}</h1>
-    <div> 
+    <div class="mb-5"> 
         <p class="card-text">
             <small class="text-muted">
                 Created by {{ $post->user->name }}
                 on {{ $post->created_at->format('M d, Y') }}
             </small>
+
+            <!-- Display the "Edit" button -->
+            @if (Auth::check() )
+                @if (auth()->user()->user_type == 'admin' || Auth::user()->id == $post->user->id) 
+                    <a href="{{ route('posts.edit', ['id' => $post ->id]) }}" class="btn btn-primary float-right">Edit</a>
+                @endif
+            @endif            
         </p>     
     </div>
     @foreach ($post->postImages as $image)
         <img src="{{ $image->url }}" class="" style="width: 50%">
+        {{-- <img src="{{ URL::asset("$image->url") }}" class="" style="width: 50%"> --}}
     @endforeach
     <p>{{ $post->content }}</p>
 </div>

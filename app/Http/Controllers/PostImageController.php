@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Post;
 use App\Models\PostImage;
-use App\Models\Comment;
-use App\Http\Controllers\PostImageController;
+use Illuminate\Http\Request;
 
-
-class PostController extends Controller
+class PostImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('postImages', 'comments')-> orderBy('id', 'desc') ->paginate(6);        
-        return view('posts.index', compact('posts'));
-
+        //
     }
 
     /**
@@ -41,7 +35,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);  
+
+        $images = $request->file('images');
+        $uploadPath = public_path('/upload_img');        
+
+        foreach($images as $image) {
+            // generate unique file name
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move($uploadPath, $imageName);
+            $imagePaths = '/upload_img/'.$imageName;
+
+       
+            // Create a new image
+            $img = new PostImage();
+            $img->post_id = $request->input('post_id');
+            $img->url = $imagePaths;
+            $img->save();                          
+        }  
+        return response()->json(['message' => 'Image Uploaded Successfully']);       
     }
 
     /**
@@ -52,8 +66,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::with('postImages', 'comments') ->findOrFail($id); 
-        return view('posts.show', compact('post'));
+        //
     }
 
     /**
@@ -64,8 +77,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::with('postImages', 'comments') ->findOrFail($id);
-        return view('posts.edit', compact('post'));
+        //
     }
 
     /**
@@ -77,24 +89,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-
-        $post = Post::findOrFail($id);
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
-        $post->save();
-
-        // Handle file upload
-        if($request->hasFile('images')) {
-            // Update image paths in the database
-            $img_controller = new PostImageController();
-            $img_controller -> store($request);
-        }        
-        return redirect()->route('posts.show', ['id' => $post ->id])->with('status', 'Post updated successfully');
+        //
     }
 
     /**
@@ -105,6 +100,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $img = PostImage::findOrFail($id);
+        $img -> delete();
     }
 }
